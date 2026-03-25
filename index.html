@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Find my teacher.com - Find Tuition Teachers</title>
+
+  <style>
+    /* Global Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Arial', sans-serif;
+    }
+
+    body {
+      background-color: #7aba6d;
+      color: #333;
+    }
+
+    /* Header */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px;
+      background-color: #4CAF50;
+      color: white;
+    }
+
+    header .logo img {
+      width: 100px;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+    }
+
+    nav ul li {
+      margin-left: 20px;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+
+    nav ul li a:hover {
+      color: #d4fdd4;
+    }
+
+    /* Hero Section */
+    .hero {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 50px;
+      background-color: #ffffff;
+      animation: fadeIn 2s ease-out;
+      flex-wrap: wrap;
+    }
+
+    .hero .hero-content {
+      width: 50%;
+      min-width: 300px;
+    }
+
+    .hero .hero-content h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      color: #2c662d;
+    }
+
+    .hero .hero-content p {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+    }
+
+    .hero .hero-content button {
+      padding: 10px 20px;
+      background-color: #22b70e;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+      border-radius: 8px;
+      transition: background-color 0.3s;
+    }
+
+    .hero .hero-content button:hover {
+      background-color: #45a049;
+    }
+
+    .hero .hero-image img {
+      width: 400px;
+      max-width: 100%;
+      border-radius: 20px;
+      animation: slideIn 2s ease-out;
+    }
+
+    /* About Section */
+    .about {
+      padding: 50px;
+      background-color: #e2e2e2;
+      text-align: center;
+      animation: fadeIn 3s ease-out;
+    }
+
+    .about h2 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      color: #2c662d;
+    }
+
+    .about p {
+      font-size: 1.2rem;
+      line-height: 1.6;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    /* Tutors Section */
+    .tutors {
+      padding: 60px 20px;
+      background-color: #ffffff;
+      text-align: center;
+      animation: fadeIn 3s ease-out;
+    }
+
+    .tutors h2 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      color: #2c662d;
+    }
+
+    .tutors p {
+      font-size: 1.2rem;
+      line-height: 1.6;
+      max-width: 900px;
+      margin: 0 auto 40px;
+      color: #333;
+    }
+
+    .tutor-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .tutor-card {
+      background-color: #f5f5f5;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .tutor-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .tutor-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 15px;
+    }
+
+    .tutor-card h3 {
+      color: #2c662d;
+      margin-bottom: 10px;
+    }
+
+    .tutor-card p {
+      font-size: 1rem;
+      margin-bottom: 10px;
+    }
+
+    .tutor-card a {
+      display: inline-block;
+      background-color: #22b70e;
+      color: white;
+      padding: 10px 15px;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: background-color 0.3s;
+    }
+
+    .tutor-card a:hover {
+      background-color: #45a049;
+    }
+
+    /* Gallery Section */
+    .gallery {
+      padding: 60px 20px;
+      background-color: #ffffff;
+      text-align: center;
+      animation: fadeIn 3s ease-out;
+    }
+
+    .gallery h2 {
+      font-size: 2.5rem;
+      margin-bottom: 30px;
+      color: #2c662d;
+    }
+
+    .gallery-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .gallery-container img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      border-radius: 15px;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .gallery-container img:hover {
+      transform: scale(1.05);
+      box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Contact Section */
+    .contact {
+      padding: 50px;
+      background-color: #f5f5f5;
+      text-align: center;
+      animation: fadeIn 4s ease-out;
+    }
+
+    .contact h2 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      color: #2c662d;
+    }
+
+    .contact form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .contact input,
+    .contact textarea {
+      width: 300px;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+
+    .contact button {
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+      border-radius: 8px;
+      transition: background-color 0.3s;
+    }
+
+    .contact button:hover {
+      background-color: #45a049;
+    }
+
+
+    /* Footer */
+    footer {
+      padding: 20px;
+      background-color: #333;
+      color: white;
+      text-align: center;
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes slideIn {
+      from {
+        transform: translateX(100%);
+      }
+
+      to {
+        transform: translateX(0);
+      }
+    }
+
+        /* Sign Up Section */
+    .signup {
+      padding: 50px;
+      background-color: #f5f5f5;
+      text-align: center;
+      animation: fadeIn 4s ease-out;
+    }
+    .signup h2 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      color: #2c662d;
+    }
+    .signup form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .signup input,
+    .signup textarea {
+      width: 300px;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="logo">
+      <img src="36adfee3-7844-4445-ac49-ccd6752ac52a.png" alt="Find My Teacher Logo">
+    </div>
+    <nav>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#tutors">Tutors</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="#signup"> Tutor signup</a></li>
+      </ul>
+    </nav>
+  </header>
+  <!-- Hero Section -->
+  <section id="home" class="hero">
+    <div class="hero-content">
+      <h1>Welcome to Find My Teacher [Home Tutor]</h1>
+      <p>Your trusted platform to find local offline tuition teachers easily and securely.We are providing home tutor to your doorstep.</p>
+      <button onclick="scrollToSection('about')">Learn More</button>
+    </div>
+    <div class="hero-image">
+      <img src="072368b0-d2fa-4eb4-a8e6-0aec328d022d.png" alt="Bright Future">
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about" class="about">
+    <h2>About Us</h2>
+    <p>
+      At Find My Teacher, we help parents find qualified offline teachers nearby, enabling personalized learning at your doorstep with ease and confidence.
+      Our teachers are verified, skilled, and passionate about shaping the future of every child. We believe every student deserves guidance from the right mentor.
+      With our platform, learning becomes convenient, reliable, and effective. Our mission is to connect families with the best local educators who understand each child's unique learning style.
+    ✔ We help parents discover qualified offline teachers nearby.
+✔ We enable personalized learning at your doorstep with ease and confidence.
+✔ Our mission is to guide your child's learning journey by connecting you with trusted educators.
+✔ We believe every student deserves the right mentor to unlock their true potential.
+✔ With us, your child's brighter future is just one connection away.
+    </p>
+  </section>
+  <!-- Gallery -->
+  <section id="gallery" class="gallery">
+    <h2> Home Tutor Environment</h2>
+    <div class="gallery-container">
+      <img src="Gemini_Generated_Image_ki0i2dki0i2dki0i.png" alt="Teacher guiding student">
+      <img src="Screenshot 2025-10-14 at 11.55.06 PM.png" alt="Home tuition environment">
+      <img src="Gemini_Generated_Image_x08p9yx08p9yx08p.png" alt="Parent and tutor discussion">
+      <img src="Screenshot 2025-10-14 at 11.54.23 PM.png" alt="Children studying happily">
+      <img src="Gemini_Generated_Image_lepcvtlepcvtlepc.png" alt="Learning with confidence">
+      <img src="ChatGPT Image Oct 16, 2025, 09_20_25 PM.png" alt="teaching with confidence">
+    </div>
+  </section>
+
+  <!-- Tutors Section -->
+  <section id="tutors" class="tutors">
+    <h2>Our Trusted Tutors</h2>
+    <p>
+      Our tutors are professionally trained, background-verified, and experienced educators who bring passion and dedication to every student's growth.  
+      They adapt lessons to your child's learning style, ensuring better understanding and improved results.  
+      Each tutor focuses on conceptual clarity and confidence-building.  
+      We believe education is not just about grades but true understanding.  
+      Our team is selected after multiple quality checks.  
+      Regular performance reviews and parent feedback keep our quality high.  
+      Every tutor brings creativity and patience to the table.  
+      We aim to make home learning enjoyable and interactive.  
+      Your child's progress is our responsibility.  
+      Trust us — you're in safe educational hands.This is our journey to provide the pocket money of student who want to make 
+      pocket money.
+    </p>
+    <h2>Some Tutors Profiles</h2>
+
+    <div class="tutor-container">
+      <div class="tutor-card">
+        <img src="Screenshot 2025-10-14 at 10.38.51 PM.png" alt="Tutor 1">
+        <h3>Mr. Rahul Sharma</h3>
+        <p>Subject: Mathematics</p>
+        <p>age: 21 </p>
+         <p> Qualification: BSc in Physic. Currently in BEd</p>
+        <p>Experience: 1 years</p>
+        <a href="https://wa.me/919508399314?text=Hi%20Mr.%20Rahul%2C%20I%27m%20interested%20in%20Maths%20tuition.">WhatsApp Now</a>
+      </div>
+
+      <div class="tutor-card">
+    <img src="Screenshot 2025-10-14 at 10.35.44 PM.png" alt="Tutor 2">
+    <h3>Ms. Priya Verma</h3>
+
+    <!-- ⭐ Professional Rating -->
+    <div class="rating" style="display: flex; align-items: center; gap: 6px; margin: 6px 0;">
+        <span style="color: #f4c430; font-size: 20px;">★★★★☆</span>
+        <span style="font-size: 14px; color: #555;">4.0</span>
+    </div>
+
+    <p>Subject: English and English grammer </p>
+    <p>age: 20 </p>
+    <p>Qualification: Distance MBA course</p>
+    <p>Experience: 2 years</p>
+    <a href="https://wa.me/919508399314?text=Hi%20Ms.%20Priya%2C%20I%27m%20interested%20in%20English%20tuition.">WhatsApp Now</a>
+</div>
+
+      <div class="tutor-card">
+        <img src="Screenshot 2025-10-14 at 10.44.34 PM.png" alt="Tutor 3">
+        <h3>Mr. Arjun Singh</h3>
+        <p>Subject: Science,Maths</p>
+        <p>age: 21 </p>
+         <p> Qualification: Computer science 2 Year </p>
+        <p>Experience: 6 years</p>
+        <a href="https://wa.me/919508399314?text=Hi%20Mr.%20Arjun%2C%20I%27m%20interested%20in%20Science%20tuition.">WhatsApp Now</a>
+      </div>
+
+      <div class="tutor-card">
+        <img src="Screenshot 2025-10-14 at 11.47.12 PM.png" alt="Tutor 4">
+        <h3>Ms. Neha Gupta</h3>
+        <p>Subject: Social Studies,Sanskrit,English,English grammer</p>
+    
+        <p>age: 19 </p>
+         <p> Qualification: BSc in Biology. Currently in BEd</p>
+        <p>Experience: 1.4 years</p>
+        <a href="https://wa.me/919508399314?text=Hi%20Ms.%20Neha%2C%20I%27m%20interested%20in%20Social%20Studies%20tuition.">WhatsApp Now</a>
+      </div>
+
+      <div class="tutor-card">
+        <img src="Screenshot 2025-10-14 at 10.43.18 PM.png" alt="Tutor 5">
+        
+        <h3>Mr. Sameer Khan</h3>
+        <p>Subject: Urdu,Arabic,Science</p>
+        <p>age: 27 </p>
+        <p> Qualification: BA in Urdu. Currently in BEd</p>
+        <p>Experience: 1 years</p>
+        <a href="https://wa.me/919508399314?text=Hi%20Mr.%20Sameer%2C%20I%27m%20interested%20in%20Computer%20Science%20tuition.">WhatsApp Now</a>
+      </div>
+
+           <div class="tutor-card">
+        <img src="Screenshot 2025-10-16 at 9.47.46 PM.png" alt="Tutor 5">
+        
+        <h3>Ms. Reema Devi</h3>
+        <p>Subject: Specialist in Sanskrit,Hindi</p>
+        <p>age: 27 </p>
+        <p> Qualification: BA in Sanskrit</p>
+        <p>Experience: 1 years</p>
+        <a href="https://wa.me/7004695830?text=Hi%20Mr.%20Sameer%2C%20I%27m%20interested%20in%20Computer%20Science%20tuition.">WhatsApp Now</a>
+      </div>
+
+
+           <div class="tutor-card">
+        <img src="Gemini_Generated_Image_ivitbmivitbmivit.png" alt="Tutor 5">
+        
+        <h3>Mr. Hanzala</h3>
+        <p>Subject: Maths,Science,GK, Social studies,English</p>
+        <p>age: 18 </p>
+        <p> Qualification: BCA 1 year.</p>
+        <p>Experience: 1 years</p>
+        <a href="https://wa.me/919508399314?text=Hi%20Mr.%20Sameer%2C%20I%27m%20interested%20in%20Computer%20Science%20tuition.">WhatsApp Now</a>
+        <a href="https://wa.me/919508399314?text=Hi%20Sir%2C%20please%20share%20your%20live%20location" target="_blank">
+📍 Track Live Location
+</a>
+      </div>
+
+      <div class="tutor-card">
+        <img src="Screenshot 2025-10-14 at 11.52.48 PM.png" alt="Tutor 6">
+        <h3>Ms. Anjali Mehta</h3>
+        <p>Subject: Hindi,Social studies,GK</p>
+        <p>age: 23 </p>
+         <p> Qualification: BSc in Maths. Currebtly in PHD</p>
+        <p>Experience: 6 months</p>
+        <a href="https://wa.me/919508399314?text=Hi%20Ms.%20Anjali%2C%20I%27m%20interested%20in%20Hindi%20tuition.">WhatsApp Now</a>
+      </div>
+    </div>
+  </section>
+
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find my teacher - Tutors near you</title>
+
+    <style>
+        body {
+            background-color: #f8f8f8f2; /* Green background */
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .main-heading {
+            text-align: center;
+            color: #2c662d;     /* Dark green text */
+            font-size: 28px;
+            font-weight: bold;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        .map-container {
+            display: flex;
+            justify-content: center;  /* Center map horizontally */
+            align-items: center;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1 class="main-heading">Tutors Nearby you</h1>
+
+    <div class="map-container">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d724.4934944735827!2d78.40787544243771!3d17.405089580258597!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb97006a11693f%3A0x5b95a2c72ce25107!2sKausar%20Manzil!5e0!3m2!1sen!2sin!4v1763733679319!5m2!1sen!2sin"
+        width="800" height="600" style="border:0;" allowfullscreen="" loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+
+</body>
+</html>
+
+  <!-- Contact -->
+  <section id="contact" class="contact">
+    <h2>Contact Us</h2>
+   <script src="https://sheetdb.io/s/f/iw50ab90ugimh.js"></script>
+  </section>
+
+  <!-- Sign Up Section (Added/Updated like Contact) -->
+  <section id="signup" class="signup">
+    <h2>Sign Up as a Tutor</h2>
+  <script src="https://sheetdb.io/s/f/a9flo5z9gsxjt.js"></script>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Find My Teacher. Created by @Md.Hanzala.</p>
+  </footer>
+
+  <script>
+    // Smooth Scroll
+    function scrollToSection(sectionId) {
+      const section = document.getElementById(sectionId);
+      window.scrollTo({
+        top: section.offsetTop,
+        behavior: 'smooth'
+      });
+    }
+
+    // Contact Form
+    document.getElementById('contact-form').addEventListener('submit', function (event) {
+      event.preventDefault();
+      alert('Thank you for contacting us! Our team will reply soon. Have a great day!');
+      this.reset();
+    });
+  </script>
+</body>
+
+</html>
